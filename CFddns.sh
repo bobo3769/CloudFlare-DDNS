@@ -96,22 +96,22 @@ while [ 1 = 1 ]
      #say
 	         echo "    ________________________________________  "
 	         echo "  / \                                       \ "
-			 echo " |   |            DDNS on CloudFlare        | "
+	         echo " |   |            DDNS on CloudFlare        | "
 	         echo "  \_ |  Domain:   $hostname.$domain"
 	         echo "     |                                      | "
-			 echo "     |  My ip is  $MYIP "
-             echo "     |                                      | "
+	         echo "     |  My ip is  $MYIP "
+	         echo "     |                                      | "
 	         echo "     |  Last time $LASTIP "
 	         echo "     |                                      | "
      {
 	 if [ "$DEBUG" = "false" ]
 	     then
-			 echo "     |                                      | "
+	         echo "     |                                      | "
 	 	 else
-		     echo "DEBUG MODE = $DEBUG"
-			 echo "Set to "false" to hide the following information"
-			 echo "--data"
-		     echo '{"type":"A","name":"'$hostname.$domain'","content":"'$MYIP'","ttl":"'$TTL'","proxied":'$proxied'}'
+	         echo "DEBUG MODE = $DEBUG"
+	         echo "Set to "false" to hide the following information"
+	         echo "--data"
+	         echo '{"type":"A","name":"'$hostname.$domain'","content":"'$MYIP'","ttl":"'$TTL'","proxied":'$proxied'}'
 	 fi
      }
 	 echo
@@ -119,9 +119,9 @@ while [ 1 = 1 ]
 	 {
      if [ "$MYIP" = "$LASTIP" ]
          then
-		     echo "     |                                      | "
-			 echo "     |  Nothing Change.                     | "
-			 echo "     |                                      | "
+	         echo "     |                                      | "
+	         echo "     |  Nothing Change.                     | "
+	         echo "     |                                      | "
 			 
          else
 			 {
@@ -132,12 +132,12 @@ while [ 1 = 1 ]
                   -H "X-Auth-Key: $GLOBAL_API_KEY" \
                   -H "Content-Type: application/json" \
                   --data '{"type":"A","name":"'$hostname.$domain'","content":"'$MYIP'","ttl":"'$TTL'","proxied":'$proxied'}'   > /dev/null
-		         echo "     |                                      | "
-			     echo "     |   IP record change!                  | "
-			     echo "     |                                      | "
+	         echo "     |                                      | "
+	         echo "     |   IP record change!                  | "
+	         echo "     |                                      | "
 				 
 			     else
-				 curl -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$Record_ID" \
+	         curl -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$Record_ID" \
                   -H "X-Auth-Email: $EMAIL" \
                   -H "X-Auth-Key: $GLOBAL_API_KEY" \
                   -H "Content-Type: application/json" \
@@ -149,18 +149,18 @@ while [ 1 = 1 ]
 	 }
 	 #time
 	         echo "     |   waitting for "$againtime""
-			 echo "     |                                      | "
+	         echo "     |                                      | "
 			 y=`date +%Y`
 			 m=`date +%m`
 			 d=`date +%d`
 			 hr=`date +%H`
 			 min=`date +%M`
 			 sec=`date +%S`
-			 echo "     |              $y/$m/$d  $hr:$min:$sec"
-			 echo "     |   ___________________________________|___ "
-			 echo "     |  /                                      / "
-			 echo "     \_/______________________________________/ "
-			 echo $feedback
+	         echo "     |              $y/$m/$d  $hr:$min:$sec"
+	         echo "     |   ___________________________________|___ "
+	         echo "     |  /                                      / "
+	         echo "     \_/______________________________________/ "
+	         echo $feedback
      sleep $againtime
 done
 }
